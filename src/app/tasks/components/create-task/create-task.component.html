@@ -1,82 +1,99 @@
-<div class="container-md" >
-    <div class="row">
-        <div class="col-12">
-            <h1 class="text-center">Formulario de tarea</h1>
-        </div>
+<div class="card w-100 max-w-2xl mx-auto">
+    <div class="card-header text-center">
+        <h2 class="card-title text-2xl font-bold">Formulario de Tarea</h2>
     </div>
-    <div class="container-md row">
-        <div class="col-lg-6 col-sm-12">
-            <form [formGroup]="createTaskForm" (ngSubmit)="onSubmit()">
-                <div class="mb-3">
-                    <label for="name_task" class="form-label">Nombre de la tarea</label>
-                    <input type="text" class="form-control" id="name_task" formControlName="name_task">
-                    <span class="text-danger" *ngIf="isValidFieldTask('name_task')" >{{ getFieldErrorTask('name_task') }}</span>
-                </div>
-                <div class="mb-3">
-                    <label for="deadline" class="form-label">Fecha limite</label>
-                    <input type="date" class="form-control" id="deadline" formControlName="deadline">
-                    <span class="text-danger" *ngIf="isValidFieldTask('deadline')" > La fecha es requerida</span>
-                </div>
-                <!-- Add user -->
-                <form [formGroup]="newUser" (submit)="addUser()">
-                    <div class="mb-3">
-                        <label for="user" class="form-label">Persona asociada</label>
-                        <div class="row">
-                            <div class="col-4">
-                                <input type="text" placeholder="Nombre" class="form-control" id="name" formControlName="name">
-                                <span *ngIf="isValidFieldUser('name')" class="text-danger">{{ getFieldErrorUser('name') }}</span>
-                            </div>
-                            <div class="col-3">
-                                <input type="number" placeholder="Edad" class="form-control" id="age" formControlName="age">
-                                <span *ngIf="isValidFieldUser('age')" class="text-danger"> {{ getFieldErrorUser('age') }}</span>
-                            </div>
-                        </div>
-                        <!-- Add skills -->
-                        <div class="row mt-2">
-                            <div class="col-6">
-                                <input type="text" class="form-control" placeholder="Habilidades" id="skills" [formControl]="newSkill">
-                                <span *ngIf="isInValidFieldSkill('skills')" class="text-danger"> ss {{ getFieldErrorSkill('skills') }}</span>
-                            </div>
-                           <div class="col-6">
-                            <button type="button" class="btn btn-primary mt-2 btn-sm ms-2" (click)="addSkill()">Agregar habilidad</button>
-                           </div>
-                        </div>
-                        <div *ngIf="skills.length" class="mt-2">
-                            <div class="row" *ngFor="let skill of skills.controls; index as i">
-                                <div class="col-6">
-                                    <span>{{skill.value}}</span>
-                                </div>
-                                <div class="col-6">
-                                    <button type="button" (click)="removeSkill(i)" class="btn btn-danger mt-2 btn-sm ms-2">Eliminar</button>
-                                </div>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary mt-2 btn-sm ms-2">Agregar persona</button>
+    <div class="card-body">
+        <form class="space-y-6" [formGroup]="createTaskForm" (ngSubmit)="onSubmit()">
+            <!-- Name task -->
+            <div class="mb-3">
+                <label for="name_task" class="form-label">Nombre de la tarea</label>
+                <input type="text" class="form-control" id="name_task" formControlName="name_task"
+                    placeholder="Ingrese el nombre de la tarea">
+                <span class="text-danger" *ngIf="isValidFieldTask('name_task')">{{ getFieldErrorTask('name_task')
+                    }}</span>
+            </div>
+
+            <!-- Deadline -->
+            <div class="mb-3 ">
+                <label for="deadline" class="form-label">Fecha limite</label>
+                <input type="date" class="form-control" id="deadline" formControlName="deadline">
+                <span class="text-danger" *ngIf="isValidFieldTask('deadline')"> La fecha es requerida</span>
+            </div>
+
+            <!-- Add user -->
+            <form [formGroup]="newUser" (submit)="addUser()">
+                <h3 class="text-lg font-semibold">Persona asociada</h3>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="personName" class="form-label">Nombre</label>
+                        <input type="text" placeholder="Nombre de la persona" class="form-control" id="name"
+                            formControlName="name">
+                        <span *ngIf="isValidFieldUser('name')" class="text-danger">{{ getFieldErrorUser('name')
+                            }}</span>
                     </div>
-                </form>
 
-                <!-- User list -->
-                <div *ngIf="users.length" class="mb-3" formArrayName="users">
-                    <label for="user" class="form-label">Personas asociadas</label>
-                    <div class="row" *ngFor="let user of users.controls; index as i">
-                        <div class="col-3">
-                           <span>{{user.value.name}}</span>
-                        </div>
-                        <div class="col-2">
-                            <span>{{user.value.age}}</span>
-                        </div>
-                        <div class="col-4">
-                            <span>{{user.value.skills.join(', ')}}</span>
-                        </div>
-                        <div class="col-3">
-                            <button type="button" (click)="removeUser(i)" class="btn btn-danger btn-sm ms-2">Eliminar</button>
-                        </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="personAge" class="form-label">Edad</label>
 
+                        <input type="number" placeholder="Edad" class="form-control" id="age" formControlName="age">
+                        <span *ngIf="isValidFieldUser('age')" class="text-danger"> {{ getFieldErrorUser('age') }}</span>
                     </div>
                 </div>
+                <!-- Add skills -->
+                <div class="mb-3">
+                    <label for="skills" class="form-label">Habilidades</label>
+                    <div class="d-flex gap-2">
+                        <input type="text" class="form-control" placeholder="Agregar Habilidades" id="skills"
+                            [formControl]="newSkill">
+                        <button type="button" class="btn btn-primary" (click)="addSkill()">+</button>
+                    </div>
+                    <span *ngIf="isInValidFieldSkill('skills')" class="text-danger"> {{ getFieldErrorSkill('skills')
+                        }}</span>
+                </div>
+                <div *ngIf="skills.length" class="mb-3">
+                    <div class="row" *ngFor="let skill of skills.controls; index as i">
+                        <div class="col-6">
+                            <span>{{skill.value}}</span>
+                        </div>
+                        <div class="col-6">
+                            <button type="button" (click)="removeSkill(i)"
+                                class="btn btn-danger mt-2 btn-sm ms-2">Eliminar</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <button type="submit" class="btn btn-outline-primary">
+                        <i class="bi bi-person-plus-fill"  ></i> Agregar persona
+                    </button>
+                    <button class="btn btn-primary" [disabled]="createTaskForm.invalid" (click)="onSubmit()">Crear
+                        tarea</button>
+                </div>
 
-                <button type="submit" class="btn btn-primary" >Crear tarea</button>
-            </form> 
-        </div>
+            </form>
+            <!-- User list -->
+            <div class="mt-3 d-flex justify-content-center" style="max-width: 650px;">
+                <table class="table table-bordered" *ngIf="users.length" formArrayName="users">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Edad</th>
+                            <th>Habilidades</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let user of users.controls; index as i">
+                            <td>{{user.value.name}}</td>
+                            <td>{{user.value.age}}</td>
+                            <td>{{user.value.skills.join(', ')}}</td>
+                            <td>
+                                <button type="button" (click)="removeUser(i)"
+                                    class="btn btn-danger btn-sm ms-2">Eliminar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </form>
     </div>
 </div>

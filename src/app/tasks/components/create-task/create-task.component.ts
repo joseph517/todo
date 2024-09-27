@@ -169,6 +169,9 @@ export class CreateTaskComponent implements OnInit {
     // Reset all form
     this.createTaskForm.reset()
     this.newUser.reset()
+    this.skills.reset()
+
+    // Clear all
     this.skills.clear()
     this.users.clear()
 
@@ -177,9 +180,7 @@ export class CreateTaskComponent implements OnInit {
     this.newUser.markAsUntouched()
     this.skills.markAsUntouched()
     this.users.markAsUntouched()
-
-
-
+    
   }
 
 }
