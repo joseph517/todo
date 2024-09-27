@@ -3,7 +3,7 @@ export interface Task {
     name_task: string;
     deadline: Date;
     state: boolean;
-    user: User[];
+    users: User[];
 }
 
 export interface User {
