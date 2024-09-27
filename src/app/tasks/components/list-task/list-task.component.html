@@ -13,7 +13,7 @@
         </div>
     </div>
 
-    <div class="row mb-3" >
+    <div class="row mb-3">
         <div class="col-12">
             <select class="form-select" [(ngModel)]="selectedState">
                 <option value="">Todas</option>
@@ -23,22 +23,7 @@
         </div>
     </div>
 
-    <div>
-        <div *ngFor="let task of filterListTask()" class="card">
-            <div class="card-body">
-                <h5 class="card-title">
-                    <input type="checkbox" [checked]="task.state" (change)="task.state = !task.state">
-                     {{task.name_task}} - Fecha limite: {{task.deadline | date}}</h5>
-                <p class="card-text">Estado: {{task.state ? 'Completada' : 'Pendiente'}}</p>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li *ngFor="let user of task.users" class="list-group-item">
-                    Nombre: {{user.name}} - Edad: {{user.age}}
-                    <ul *ngFor="let skill of user.skills">
-                        <li class="list-group-item">{{skill}}</li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </div>
+    <task-card-task *ngFor="let task of filterListTask()" [task]="task"></task-card-task>
+
+    
 </div>

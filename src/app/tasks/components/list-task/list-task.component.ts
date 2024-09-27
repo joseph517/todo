@@ -3,13 +3,15 @@ import { CommonModule } from '@angular/common';
 import { TaskService } from '../../services/task.service';
 import { Task } from '../../interfaces/task';
 import { FormsModule } from '@angular/forms';
+import { CardTaskComponent } from "../card-task/card-task.component";
 
 @Component({
   standalone: true,
   imports: [
     CommonModule,
-    FormsModule
-  ],
+    FormsModule,
+    CardTaskComponent
+],
   templateUrl: './list-task.component.html',
   styleUrls: ['./list-task.component.sass']
 })

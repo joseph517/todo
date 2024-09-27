@@ -1,0 +1,17 @@
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">
+            <input type="checkbox" [checked]="task.state" (change)="task.state = !task.state">
+            {{task.name_task}} - Fecha limite: {{task.deadline | date}}
+        </h5>
+        <p class="card-text">Estado: {{task.state ? 'Completada' : 'Pendiente'}}</p>
+    </div>
+    <ul class="list-group list-group-flush">
+        <li *ngFor="let user of task.users" class="list-group-item">
+            Nombre: {{user.name}} - Edad: {{user.age}}
+            <ul *ngFor="let skill of user.skills">
+                <li class="list-group-item">{{skill}}</li>
+            </ul>
+        </li>
+    </ul>
+</div>
