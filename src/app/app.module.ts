@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TasksModule } from './tasks/tasks.module';
+import { NavbarComponent } from './tasks/components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +14,8 @@ import { TasksModule } from './tasks/tasks.module';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    TasksModule
+    NavbarComponent
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
