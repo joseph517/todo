@@ -4,7 +4,6 @@ import { TasksRoutingModule } from './tasks-routing.module';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { AngularMaterialModule } from '../angular-material/angular-material.module';
 import { CreateTaskComponent } from './components/create-task/create-task.component';
-import { ListTaskComponent } from './components/list-task/list-task.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
@@ -12,7 +11,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   declarations: [
     NavbarComponent,
     CreateTaskComponent,
-    ListTaskComponent,
   ],
   imports: [
     CommonModule,

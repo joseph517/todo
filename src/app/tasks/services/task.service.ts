@@ -11,32 +11,6 @@ export class TaskService {
     private task: BehaviorSubject<Task[]> = new BehaviorSubject<Task[]>([])
     readonly task$ = this.task.asObservable()
 
-    isValidField(form: FormGroup, field: string ): boolean | null {
-        return form.controls[field].errors && form.controls[field].touched
-    }
-
-    getFieldError(form: FormGroup, field: string): string | null {
-  
-      const errors = form.controls[field].errors as { [key: string]: any }
-      for (const key of Object.keys(errors)) {
-  
-        switch(key){
-          case 'required':
-            return 'Este campo es requerido'
-  
-          case 'minlength':
-            return `Minimo ${ errors['minlength'].requiredLength } caracteres`
-          
-          case 'min':
-            return `Debe ser mayor a ${ errors['min'].min }`
-        }
-  
-      }
-  
-      return null
-  
-    }
-
     getTask(): Task[] {
       return this.task.getValue()
     }
@@ -61,8 +35,6 @@ export class TaskService {
       const tasks = this.task.getValue().filter( task => task.id !== id)
       this.task.next(tasks)
     }
-
-
 
 
 }
