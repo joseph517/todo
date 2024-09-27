@@ -23,6 +23,16 @@
         </div>
     </div>
 
-    <task-card-task *ngFor="let task of filterListTask()" [task]="task"></task-card-task>
+    <div *ngIf="filterListTask().length">
+        <task-card-task *ngFor="let task of filterListTask()" [task]="task"></task-card-task>
+    </div>
+
+    <div *ngIf="!filterListTask().length">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center">No hay tareas {{ selectedState === 'true' ? 'completadas' : 'pendientes' }}</h1>
+            </div>
+        </div>
+    </div>
 
 </div>
