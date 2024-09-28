@@ -97,3 +97,7 @@
         </form>
     </div>
 </div>
+
+<div *ngIf="showToast">
+  <task-toast [message]="message" [typeError]="typeError"></task-toast>
+</div>

@@ -1,21 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TaskService } from '../../services/task.service';
-import { Task, User } from '../../interfaces/task';
+import { User } from '../../interfaces/task';
 
 @Component({
   templateUrl: './create-task.component.html',
   styleUrls: ['./create-task.component.sass']
 })
-export class CreateTaskComponent implements OnInit {
+export class CreateTaskComponent {
 
-
-
-  ngOnInit(): void {
-    this.taskService.task$.subscribe((task: Task[]) => {
-      console.log(task)
-    })
-  }
+  showToast: boolean = false
+  message: string = ''
+  typeError: string = ''
   constructor(
     private taskService: TaskService,
     private fb: FormBuilder
@@ -47,13 +43,23 @@ export class CreateTaskComponent implements OnInit {
     return this.newUser.get('skills') as FormArray
   }
 
+  setErroMessage(message: string, typeError: string = '') {
+    this.message = message
+    this.typeError = typeError
+    this.showToast = true
+    setTimeout(() => {
+      this.showToast = false
+    }, 2000)
+  }
+
+
   addUser() {
     if (this.newUser.invalid) return
     if (this.skills.length === 0) return
     const newUser = this.newUser.value
     const userExist = this.users.value.find((user: User) => user.name === newUser.name)
     if (userExist) {
-      console.log('El nombre ya existe')
+      this.setErroMessage('Ya existe el usuario', 'warning')
       return
     }
     this.users.push(
@@ -74,12 +80,12 @@ export class CreateTaskComponent implements OnInit {
 
     const skillExist = this.skills.value.find((skill: string) => skill === newSkill)
     if (skillExist) {
-      console.log('La habilidad ya existe')
+      this.setErroMessage('Ya existe la habilidad', 'warning')
       return
     }
 
     this.skills.push(
-      this.fb.control(newSkill, [Validators.required, Validators.minLength(3)])
+      this.fb.control(newSkill, [])
     )
 
     this.newSkill.reset()
@@ -161,26 +167,16 @@ export class CreateTaskComponent implements OnInit {
   onSubmit() {
     if (this.createTaskForm.invalid) return
 
-    console.log(this.createTaskForm)
-
     this.taskService.addTask(this.createTaskForm.value)
-
 
     // Reset all form
     this.createTaskForm.reset()
     this.newUser.reset()
-    this.skills.reset()
+    this.newSkill.reset()
 
     // Clear all
     this.skills.clear()
-    this.users.clear()
-
-    // Remove touch
-    this.createTaskForm.markAsUntouched()
-    this.newUser.markAsUntouched()
-    this.skills.markAsUntouched()
-    this.users.markAsUntouched()
-    
+    this.users.clear()    
   }
 
 }

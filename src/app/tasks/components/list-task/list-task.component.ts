@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TaskService } from '../../services/task.service';
 import { Task } from '../../interfaces/task';
@@ -15,24 +15,19 @@ import { CardTaskComponent } from "../card-task/card-task.component";
   templateUrl: './list-task.component.html',
   styleUrls: ['./list-task.component.sass']
 })
-export class ListTaskComponent implements OnInit {
+export class ListTaskComponent{
 
   public listTask: Task[] = this.taskService.getTask()
-  public selectedState: string = ''
+  public selectedState: string = 'all'
   
   filterListTask(): Task[] {
-    if (this.selectedState === '') {
+    if (this.selectedState === 'all') {
       return this.listTask
     }
-    return this.listTask.filter( task => task.state == (this.selectedState === 'true'))
+    return this.listTask.filter( task => task.state == (this.selectedState === 'completed' ? true : false))
   }
 
   constructor(
     private taskService: TaskService
   ) { }
-
-  ngOnInit(): void {
-    this.taskService.getTask()
-    console.log(this.taskService.getTask())
-  }
 }

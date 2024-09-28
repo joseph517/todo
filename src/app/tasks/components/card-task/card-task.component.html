@@ -1,7 +1,7 @@
 <div class="card mb-3">
     <div class="card-body">
         <h5 class="card-title">
-            <input type="checkbox" [checked]="task.state" (change)="task.state = !task.state">
+            <input type="checkbox" [checked]="task.state" (click)="toggleState()">
             {{task.name_task}} - Fecha limite: {{task.deadline | date}}
         </h5>
         <p class="card-text">Estado: {{task.state ? 'Completada' : 'Pendiente'}}</p>
