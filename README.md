@@ -1,4 +1,14 @@
-# Todo
+# TODO
+# View page https://todo-two-smoky-15.vercel.app/create-task
+View web
+![image](https://github.com/user-attachments/assets/6ce535de-55ef-42a9-88b4-9b0514eaaaf9)
+
+![image](https://github.com/user-attachments/assets/490d3194-8566-4382-af1d-14e0bd4805b5)
+
+![image](https://github.com/user-attachments/assets/0d60d33b-5808-4afe-88d3-565bc4c18d7f)
+
+
+
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.16.
 
